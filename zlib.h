@@ -37,8 +37,8 @@
 extern "C" {
 #endif
 
-#define ZLIB_VERSION "1.2.3"
-#define ZLIB_VERNUM 0x1230
+#define ZLIB_VERSION "1.2.3.f-codeaurora-mods-v1"
+#define ZLIB_VERNUM 0x123f
 
 /*
      The 'zlib' compression library provides in-memory compression and
