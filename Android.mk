@@ -67,12 +67,14 @@ unzip_files := \
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := $(unzip_files)
 LOCAL_MODULE:= libunz
+LOCAL_MODULE_TAGS := optional
 LOCAL_ARM_MODE := arm
 include $(BUILD_HOST_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := $(unzip_files)
 LOCAL_MODULE:= libunz
+LOCAL_MODULE_TAGS := optional
 LOCAL_ARM_MODE := arm
 include $(BUILD_STATIC_LIBRARY)
 
@@ -82,6 +84,7 @@ LOCAL_SRC_FILES:=        \
 	minigzip.c
 
 LOCAL_MODULE:= gzip
+LOCAL_MODULE_TAGS := optional
 
 LOCAL_SHARED_LIBRARIES := libz
 
@@ -93,6 +96,7 @@ LOCAL_SRC_FILES:=        \
 	minigzip.c
 
 LOCAL_MODULE:= minigzip
+LOCAL_MODULE_TAGS := optional
 
 LOCAL_STATIC_LIBRARIES := libz
 
