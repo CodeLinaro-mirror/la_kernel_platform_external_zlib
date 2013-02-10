@@ -2,7 +2,7 @@
   version 1.2.5, April 19th, 2010
 
   Copyright (C) 1995-2010 Jean-loup Gailly and Mark Adler
-  Copyright (c) 2010-2011 Code Aurora Forum. All rights reserved.
+  Copyright (c) 2010-2011 The Linux Foundation. All rights reserved.
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
