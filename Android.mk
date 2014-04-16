@@ -115,3 +115,16 @@ LOCAL_MODULE:= minigzip
 LOCAL_STATIC_LIBRARIES := libz
 
 include $(BUILD_HOST_EXECUTABLE)
+
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := \
+	src/contrib/minizip/zip.c \
+	src/contrib/minizip/ioapi.c \
+	src/contrib/minizip/mztools.c \
+	src/contrib/minizip/unzip.c
+
+LOCAL_MODULE := libminizip
+LOCAL_STATIC_LIBRARIES := libz
+LOCAL_MODULE_TAGS := optional
+LOCAL_CFLAGS := -DUSE_FILE32API
+include $(BUILD_STATIC_LIBRARY)
