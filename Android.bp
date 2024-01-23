@@ -196,38 +196,46 @@ cc_library {
         vendor: {
             no_stubs: true,
         },
-    }
+    },
 }
 
 cc_library {
     name: "libz_static",
     defaults: ["libz_defaults"],
-    visibility: ["//external/angle"],
+    visibility: [
+        "//external/angle",
+        "//system/unwinding/libunwindstack",
+    ],
 
     srcs: libz_srcs,
 
     sdk_version: "minimum",
+    min_sdk_version: "apex_inherit",
 
     apex_available: [
+        "com.android.art",
+        "com.android.art.debug",
         "com.android.runtime",
         "//apex_available:platform",
     ],
 }
 
 // A more stable build of libz. Build configuration of this library should be
-// the same for different targets. This is only used by imgdiff.
-
+// the same for different targets. This is only used by OTA tools such as imgdiff and updater.
 cc_library {
     name: "libz_stable",
     visibility: [
         "//bootable/recovery/applypatch",
         "//bootable/recovery/tests",
+        "//bootable/recovery/updater",
     ],
     cflags: [
         // We do support hidden visibility, so turn that on.
         "-DHAVE_HIDDEN",
         // We do support const, so turn that on.
         "-DZLIB_CONST",
+        // Use the traditional Rabin-Karp rolling hash to match zlib DEFLATE output exactly.
+        "-DCHROMIUM_ZLIB_NO_CASTAGNOLI",
         // Enable -O3 as per chromium
         "-O3",
         "-Wall",
@@ -388,7 +396,7 @@ cc_fuzz {
     srcs: ["contrib/tests/fuzzers/streaming_inflate_fuzzer.cc"],
     fuzz_config: {
         libfuzzer_options: ["max_len=256000"],
-    }
+    },
 }
 
 cc_fuzz {
