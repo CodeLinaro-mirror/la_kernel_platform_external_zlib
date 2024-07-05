@@ -177,19 +177,33 @@ cc_defaults {
     },
 }
 
+// TODO: Remove this when b/328163089 is fixed.
+// Thin lto will be enabled by default in the future.
+cc_defaults {
+    name: "libz_thin_lto_defaults",
+
+    target: {
+        android_arm64: {
+            lto: {
+                thin: true,
+            },
+        },
+    },
+}
+
 cc_library {
     name: "libz",
-    defaults: ["libz_defaults"],
+    defaults: [
+        "libz_defaults",
+        "libz_thin_lto_defaults",
+    ],
 
     whole_static_libs: ["libz_static"],
 
     unique_host_soname: true,
     static_ndk_lib: true,
 
-    vndk: {
-        enabled: true,
-        support_system_process: true,
-    },
+    double_loadable: true,
 
     stubs: {
         versions: [
@@ -215,10 +229,7 @@ cc_library {
 cc_library {
     name: "libz_static",
     defaults: ["libz_defaults"],
-    visibility: [
-        "//external/angle",
-        "//system/unwinding/libunwindstack",
-    ],
+    visibility: ["//visibility:private"],
 
     srcs: libz_srcs,
 
@@ -241,6 +252,7 @@ cc_library {
 // can and do differ over time.
 cc_library {
     name: "libz_stable",
+    defaults: ["libz_thin_lto_defaults"],
     visibility: [
         "//bootable/recovery/applypatch",
         "//bootable/recovery/tests",
