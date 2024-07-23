@@ -186,7 +186,10 @@ cc_library {
     unique_host_soname: true,
     static_ndk_lib: true,
 
-    double_loadable: true,
+    vndk: {
+        enabled: true,
+        support_system_process: true,
+    },
 
     stubs: {
         versions: [
