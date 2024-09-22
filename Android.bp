@@ -194,6 +194,13 @@ cc_library {
         symbol_file: "libz.map.txt",
     },
 
+    // linker/linker64 statically link zlib.
+    static: {
+        apex_available: [
+            "com.android.runtime",
+        ],
+    },
+
     // When used by Vendor/Product APEX,
     // libz should be treated like non-stable module.
     // (Hence, should be bundled in APEX).
@@ -329,9 +336,6 @@ ndk_library {
     symbol_file: "libz.map.txt",
     first_version: "9",
     unversioned_until: "current",
-    export_header_libs: [
-        "libz_headers",
-    ],
 }
 
 // Export zlib headers for inclusion in the musl sysroot.
