@@ -9,11 +9,11 @@ third_party {
   last_upgrade_date {
     year: 2025
     month: 4
-    day: 3
+    day: 10
   }
   identifier {
     type: "Git"
     value: "https://chromium.googlesource.com/chromium/src/third_party/zlib/"
-    version: "788cb3c270e8700b425c7bdca1f9ce6b0c1400a9"
+    version: "780819f6359f8aa3da8e3abb8d7fa43ede81cdd0"
   }
 }
