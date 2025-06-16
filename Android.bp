@@ -32,6 +32,11 @@ cflags_shared = [
     "-Wno-unused-parameter",
 ]
 
+cflags_lp64 = [
+    "-DDEFLATE_CHUNK_WRITE_64LE",
+    "-DINFLATE_CHUNK_READ_64LE",
+]
+
 cflags_arm = [
     // Even the NDK dropped non-neon support in r24.
     "-DADLER32_SIMD_NEON",
@@ -42,15 +47,14 @@ cflags_arm = [
     // TODO: DINFLATE_CHUNK_SIMD_NEON causes `atest org.apache.harmony.tests.java.util.zip.DeflaterTest` failures.
     // "-DINFLATE_CHUNK_SIMD_NEON",
 ]
-cflags_arm64 = cflags_arm + ["-DINFLATE_CHUNK_READ_64LE"]
+cflags_arm64 = cflags_arm + cflags_lp64
 
 cflags_riscv64 = [
     "-DRISCV_RVV",
     "-DADLER32_SIMD_RVV",
     "-DDEFLATE_SLIDE_HASH_RVV",
     "-DINFLATE_CHUNK_GENERIC",
-    "-DINFLATE_CHUNK_READ_64LE",
-]
+] + cflags_lp64
 
 cflags_x86 = [
     // Android's x86 and x86-64 ABIs both include SSE2 and SSSE3.
@@ -60,7 +64,7 @@ cflags_x86 = [
     // TODO: DINFLATE_CHUNK_SIMD_SSE2 causes `atest org.apache.harmony.tests.java.util.zip.DeflaterTest` failures.
     // "-DINFLATE_CHUNK_SIMD_SSE2",
 ]
-cflags_x86_64 = cflags_x86 + ["-DINFLATE_CHUNK_READ_64LE"]
+cflags_x86_64 = cflags_x86 + cflags_lp64
 
 libz_srcs = [
     "adler32.c",
