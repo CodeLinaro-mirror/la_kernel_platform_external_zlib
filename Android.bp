@@ -197,6 +197,14 @@ cc_library {
         symbol_file: "libz.map.txt",
     },
 
+    // Ignore the `internal_state` struct for ABI checks.
+    header_abi_checker: {
+        diff_flags: [
+            "-ignore-linker-set-key",
+            "_ZTI14internal_state",
+        ],
+    },
+
     // linker/linker64 statically link zlib.
     static: {
         apex_available: [
