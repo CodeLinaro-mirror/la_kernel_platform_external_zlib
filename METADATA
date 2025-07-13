@@ -8,12 +8,12 @@ third_party {
   license_type: NOTICE
   last_upgrade_date {
     year: 2025
-    month: 6
-    day: 16
+    month: 7
+    day: 7
   }
   identifier {
     type: "Git"
     value: "https://chromium.googlesource.com/chromium/src/third_party/zlib/"
-    version: "470d3a2ee4ef721688ce6961bc865a99fcb64070"
+    version: "3102d2a0da9555701b4aa4e531a89dc9ef10d604"
   }
 }
