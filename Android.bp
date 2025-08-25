@@ -58,9 +58,8 @@ cflags_riscv64 = [
 
 cflags_x86 = [
     // Android's x86 and x86-64 ABIs both include SSE2 and SSSE3.
+    // The host doesn't (as of 2025), but this is guarded by a CPUID check.
     "-DADLER32_SIMD_SSSE3",
-    // ...but we haven't yet told the build system that the _host_ should match.
-    "-mssse3",
     // TODO: DINFLATE_CHUNK_SIMD_SSE2 causes `atest org.apache.harmony.tests.java.util.zip.DeflaterTest` failures.
     // "-DINFLATE_CHUNK_SIMD_SSE2",
 ]
