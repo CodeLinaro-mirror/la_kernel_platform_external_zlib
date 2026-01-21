@@ -353,7 +353,11 @@ ndk_library {
     symbol_file: "libz.map.txt",
     first_version: "9",
     unversioned_until: "current",
+    bypass_artless_denylist: true,
 }
+
+// This runtime library does not depend on ART at all, so it simply gets an
+// empty denylist.
 
 // Export zlib headers for inclusion in the musl sysroot.
 genrule {
