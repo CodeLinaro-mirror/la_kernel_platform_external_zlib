@@ -13,12 +13,12 @@ third_party {
   }
   last_upgrade_date {
     year: 2026
-    month: 2
-    day: 27
+    month: 3
+    day: 6
   }
   identifier {
     type: "Git"
     value: "https://chromium.googlesource.com/chromium/src/third_party/zlib/"
-    version: "b013c8a5743f030995becfd0c6be1ec73bba64b8"
+    version: "9d0985a0c5115f95c89cb29a815f77381979322d"
   }
 }
