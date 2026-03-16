@@ -1381,9 +1381,9 @@ ZEXTERN int ZEXPORT uncompress_z(Bytef *dest, z_size_t *destLen,
 #if !defined(__ANDROID__) || __ANDROID_API__ >= 28
 ZEXTERN int ZEXPORT uncompress2(Bytef *dest, uLongf *destLen,
                                 const Bytef *source, uLong *sourceLen);
-#endif
 ZEXTERN int ZEXPORT uncompress2_z(Bytef *dest, z_size_t *destLen,
                                   const Bytef *source, z_size_t *sourceLen);
+#endif
 /*
      Same as uncompress, except that sourceLen is a pointer, where the
    length of the source is *sourceLen.  On return, *sourceLen is the number of
