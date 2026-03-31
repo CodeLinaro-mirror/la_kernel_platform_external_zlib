@@ -12,13 +12,13 @@ third_party {
     mitigated_security_patch: "CVE-2023-45853"
   }
   last_upgrade_date {
-    year: 2025
-    month: 8
-    day: 25
+    year: 2026
+    month: 2
+    day: 27
   }
   identifier {
     type: "Git"
     value: "https://chromium.googlesource.com/chromium/src/third_party/zlib/"
-    version: "caf4afa1afc92e16fef429f182444bed98a46a6c"
+    version: "b013c8a5743f030995becfd0c6be1ec73bba64b8"
   }
 }
