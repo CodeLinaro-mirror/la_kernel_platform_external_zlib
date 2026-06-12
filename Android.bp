@@ -188,6 +188,7 @@ cc_defaults {
 cc_library {
     name: "libz",
     defaults: ["libz_defaults"],
+    ota_recovery_ramdisk_available: true,
 
     srcs: libz_srcs,
 
