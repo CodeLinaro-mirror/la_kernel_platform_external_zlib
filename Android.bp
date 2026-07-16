@@ -369,7 +369,6 @@ genrule {
     name: "libc_musl_sysroot_zlib_headers",
     visibility: ["//external/musl"],
     srcs: [
-        "LICENSE",
         "zconf.h",
         "zlib.h",
     ],
@@ -378,17 +377,17 @@ genrule {
         "soong_zip",
         "zip2zip",
     ],
-    cmd: "$(location soong_zip) -o $(genDir)/sysroot.zip -symlinks=false" +
-        // NOTICE
-        " -j -f $(location LICENSE) " +
+    cmd: "$(location soong_zip) -o $(out) -symlinks=false" +
         // headers
         " -j -P include " +
         "  -f $(location zconf.h) " +
-        "  -f $(location zlib.h) " +
-        " && " +
-        "$(location zip2zip) -i $(genDir)/sysroot.zip -o $(out) " +
-        " include/**/*:include " +
-        " LICENSE:NOTICE.zlib",
+        "  -f $(location zlib.h)",
+}
+
+filegroup {
+    name: "libc_musl_sysroot_zlib_notice",
+    visibility: ["//external/musl"],
+    srcs: ["LICENSE"],
 }
 
 cc_defaults {
