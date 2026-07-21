@@ -44,8 +44,8 @@ cflags_arm = [
     // acceleration for both 64-bit and 32-bit (which may be armv7, at
     // least for NDK users).
     "-DCRC32_ARMV8_CRC32",
-    // TODO: DINFLATE_CHUNK_SIMD_NEON causes `atest org.apache.harmony.tests.java.util.zip.DeflaterTest` failures.
-    // "-DINFLATE_CHUNK_SIMD_NEON",
+    // Chromium enables this on every arm/arm64 build.
+    "-DINFLATE_CHUNK_SIMD_NEON",
 ]
 cflags_arm64 = cflags_arm + cflags_lp64
 
@@ -89,12 +89,11 @@ libz_srcs = [
     "trees.c",
     "uncompr.c",
     "zutil.c",
+]
 
-    // Not-yet-enabled optimizations.
-    // See https://chromium-review.googlesource.com/749732.
-    // TODO: causes `atest org.apache.harmony.tests.java.util.zip.DeflaterTest` failures.
-    //    "contrib/optimizations/inffast_chunk.c",
-    //    "contrib/optimizations/inflate.c",
+inflate_chunk_srcs = [
+    "contrib/optimizations/inffast_chunk.c",
+    "contrib/optimizations/inflate.c",
 ]
 
 cc_defaults {
@@ -191,6 +190,17 @@ cc_library {
     ota_recovery_ramdisk_available: true,
 
     srcs: libz_srcs,
+
+    arch: {
+        arm: {
+            exclude_srcs: ["inflate.c"],
+            srcs: inflate_chunk_srcs,
+        },
+        arm64: {
+            exclude_srcs: ["inflate.c"],
+            srcs: inflate_chunk_srcs,
+        },
+    },
 
     unique_host_soname: true,
     static_ndk_lib: true,
