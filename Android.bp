@@ -40,12 +40,12 @@ cflags_lp64 = [
 cflags_arm = [
     // Even the NDK dropped non-neon support in r24.
     "-DADLER32_SIMD_NEON",
+    "-DDEFLATE_SLIDE_HASH_NEON",
+    "-DINFLATE_CHUNK_SIMD_NEON",
     // HWCAP_CRC32 is checked at runtime, so it's okay to enable crc32
     // acceleration for both 64-bit and 32-bit (which may be armv7, at
     // least for NDK users).
     "-DCRC32_ARMV8_CRC32",
-    // Chromium enables this on every arm/arm64 build.
-    "-DINFLATE_CHUNK_SIMD_NEON",
 ]
 cflags_arm64 = cflags_arm + cflags_lp64
 
@@ -59,8 +59,9 @@ cflags_riscv64 = [
 cflags_x86 = [
     // Android's x86 and x86-64 ABIs both include SSE2 and SSSE3.
     // The host doesn't (as of 2025), but this is guarded by a CPUID check.
-    "-DINFLATE_CHUNK_SIMD_SSE2",
     "-DADLER32_SIMD_SSSE3",
+    "-DDEFLATE_SLIDE_HASH_SSE2",
+    "-DINFLATE_CHUNK_SIMD_SSE2",
     // SSE4.2 is only in the x86-64 device ABI,
     // and PCLMUL isn't guaranteed anywhere,
     // but again this is guarded by a CPUID check.
