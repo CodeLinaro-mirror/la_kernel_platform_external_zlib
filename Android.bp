@@ -59,13 +59,12 @@ cflags_riscv64 = [
 cflags_x86 = [
     // Android's x86 and x86-64 ABIs both include SSE2 and SSSE3.
     // The host doesn't (as of 2025), but this is guarded by a CPUID check.
+    "-DINFLATE_CHUNK_SIMD_SSE2",
     "-DADLER32_SIMD_SSSE3",
     // SSE4.2 is only in the x86-64 device ABI,
     // and PCLMUL isn't guaranteed anywhere,
     // but again this is guarded by a CPUID check.
     "-DCRC32_SIMD_SSE42_PCLMUL",
-    // TODO: DINFLATE_CHUNK_SIMD_SSE2 causes `atest org.apache.harmony.tests.java.util.zip.DeflaterTest` failures.
-    // "-DINFLATE_CHUNK_SIMD_SSE2",
 ]
 cflags_x86_64 = cflags_x86 + cflags_lp64
 
@@ -197,6 +196,14 @@ cc_library {
             srcs: inflate_chunk_srcs,
         },
         arm64: {
+            exclude_srcs: ["inflate.c"],
+            srcs: inflate_chunk_srcs,
+        },
+        x86: {
+            exclude_srcs: ["inflate.c"],
+            srcs: inflate_chunk_srcs,
+        },
+        x86_64: {
             exclude_srcs: ["inflate.c"],
             srcs: inflate_chunk_srcs,
         },
