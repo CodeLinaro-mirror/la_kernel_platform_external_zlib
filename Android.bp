@@ -84,14 +84,10 @@ libz_srcs = [
     "gzwrite.c",
     "infback.c",
     "inffast.c",
-    "inflate.c",
     "inftrees.c",
     "trees.c",
     "uncompr.c",
     "zutil.c",
-]
-
-inflate_chunk_srcs = [
     "contrib/optimizations/inffast_chunk.c",
     "contrib/optimizations/inflate.c",
 ]
@@ -191,23 +187,15 @@ cc_library {
 
     srcs: libz_srcs,
 
+    // riscv64 is missing this optimization and needs the generic code.
     arch: {
-        arm: {
-            exclude_srcs: ["inflate.c"],
-            srcs: inflate_chunk_srcs,
-        },
-        arm64: {
-            exclude_srcs: ["inflate.c"],
-            srcs: inflate_chunk_srcs,
-        },
-        x86: {
-            exclude_srcs: ["inflate.c"],
-            srcs: inflate_chunk_srcs,
-        },
-        x86_64: {
-            exclude_srcs: ["inflate.c"],
-            srcs: inflate_chunk_srcs,
-        },
+        riscv64: {
+            exclude_srcs: [
+                "contrib/optimizations/inffast_chunk.c",
+                "contrib/optimizations/inflate.c",
+            ],
+            srcs: ["inflate.c"],
+        }
     },
 
     unique_host_soname: true,
@@ -272,12 +260,20 @@ cc_library {
         "//bootable/deprecated-ota/tests",
         "//bootable/deprecated-ota/updater",
     ],
+
     // We only use the shared flags here; the whole point is that this
     // library behaves the same on all different architectures.
     cflags: cflags_shared,
+
+    // Similarly, we don't want optimizations.
+    exclude_srcs: [
+        "contrib/optimizations/inffast_chunk.c",
+        "contrib/optimizations/inflate.c",
+    ],
+    srcs: libz_srcs + ["inflate.c"],
+
     stl: "none",
     export_include_dirs: ["."],
-    srcs: libz_srcs,
     host_supported: true,
     vendor_available: true,
     recovery_available: true,
