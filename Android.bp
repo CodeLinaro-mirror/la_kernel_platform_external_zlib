@@ -34,6 +34,7 @@ cflags_shared = [
 
 cflags_lp64 = [
     "-DDEFLATE_CHUNK_WRITE_64LE",
+    "-DDEFLATE_COMPARE256_64LE",
     "-DINFLATE_CHUNK_READ_64LE",
 ]
 
@@ -195,7 +196,7 @@ cc_library {
                 "contrib/optimizations/inflate.c",
             ],
             srcs: ["inflate.c"],
-        }
+        },
     },
 
     unique_host_soname: true,
